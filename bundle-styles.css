@@ -1,0 +1,714 @@
+/* ============================================================
+   POD Jewellery Bundle Builder — Shopify Section Styles
+   Scoped under .bundle-section to avoid conflicts with the
+   Turbo theme. Uses Poppins / PT Sans to match site fonts.
+   ============================================================ */
+
+:root {
+  --bundle-brand:       #BF151B;
+  --bundle-brand-dark:  #1B3A4B;
+  --bundle-brand-light: #E8E2D9;
+  --bundle-accent:      #C9A84C;
+  --bundle-text:        #585858;
+  --bundle-text-muted:  #A3B18A;
+  --bundle-border:      #d4cdc4;
+  --bundle-bg:          #E8E2D9;
+  --bundle-white:       #FFFFFF;
+  --bundle-success:     #2C6E6F;
+  --bundle-radius:      4px;
+  --bundle-shadow:      0 2px 12px rgba(0,0,0,0.08);
+}
+
+.bundle-section {
+  font-family: 'Poppins', sans-serif;
+  color: var(--bundle-text);
+  line-height: 1.5;
+}
+
+.bundle-section *,
+.bundle-section *::before,
+.bundle-section *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Mobile toggle (floating, shown only on small screens) ───── */
+
+.bundle-section .toggle-bundle-btn {
+  display: none;
+  background: var(--bundle-brand);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: var(--bundle-radius);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.bundle-section #bundle-count {
+  background: var(--bundle-accent);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -6px;
+  right: -6px;
+}
+
+/* ── Subscriber bar ──────────────────────────────────────────── */
+
+.bundle-section .subscriber-bar {
+  background: var(--bundle-brand-dark);
+  color: white;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+.bundle-section .subscriber-bar-icon { font-size: 1rem; }
+
+.bundle-section .subscriber-bar-link {
+  color: var(--bundle-accent);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.bundle-section .subscriber-bar-link:hover { text-decoration: underline; }
+
+/* ── Discount banner ─────────────────────────────────────────── */
+
+.bundle-section .discount-banner {
+  background: var(--bundle-brand-light);
+  border-bottom: 1px solid var(--bundle-border);
+  padding: 12px 24px;
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.bundle-section .banner-tier {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--bundle-brand-dark);
+}
+
+.bundle-section .banner-tier .tier-icon {
+  background: var(--bundle-brand);
+  color: white;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* ── Loading / Error ─────────────────────────────────────────── */
+
+.bundle-section #loading {
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.bundle-section .spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--bundle-border);
+  border-top-color: var(--bundle-brand);
+  border-radius: 50%;
+  animation: bundle-spin 0.8s linear infinite;
+}
+
+@keyframes bundle-spin { to { transform: rotate(360deg); } }
+
+.bundle-section .error-state { text-align: center; color: #c0392b; }
+.bundle-section .error-state .error-detail { font-size: 0.85rem; margin: 8px 0; }
+.bundle-section .error-state code { background: #fdecea; padding: 2px 6px; border-radius: var(--bundle-radius); }
+
+/* ── App layout ──────────────────────────────────────────────── */
+
+.bundle-section #app-content {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 0;
+  min-height: calc(100vh - 160px);
+}
+
+/* ── Product panel ───────────────────────────────────────────── */
+
+.bundle-section .product-panel {
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.bundle-section .product-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.bundle-section .product-count {
+  color: var(--bundle-text-muted);
+  font-size: 0.9rem;
+}
+
+.bundle-section #search-input {
+  padding: 10px 16px;
+  border: 1px solid var(--bundle-border);
+  border-radius: var(--bundle-radius);
+  font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif;
+  width: 260px;
+  background: var(--bundle-white);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.bundle-section #search-input:focus { border-color: var(--bundle-brand); }
+
+/* ── Filter bar ──────────────────────────────────────────────── */
+
+.bundle-section #filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.bundle-section .filter-btn {
+  padding: 6px 14px;
+  border: 1px solid var(--bundle-border);
+  border-radius: var(--bundle-radius);
+  background: var(--bundle-white);
+  color: var(--bundle-text);
+  font-size: 0.82rem;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.bundle-section .filter-btn:hover  { border-color: var(--bundle-brand); color: var(--bundle-brand); }
+.bundle-section .filter-btn.active { background: var(--bundle-brand); color: white; border-color: var(--bundle-brand); }
+
+/* ── Product grid ────────────────────────────────────────────── */
+
+.bundle-section #product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.bundle-section .empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--bundle-text-muted);
+  padding: 40px;
+}
+
+.bundle-section .product-card {
+  background: var(--bundle-white);
+  border: 2px solid var(--bundle-border);
+  border-radius: var(--bundle-radius);
+  overflow: hidden;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.bundle-section .product-card:hover     { box-shadow: var(--bundle-shadow); }
+.bundle-section .product-card.in-bundle { border-color: var(--bundle-brand); }
+
+.bundle-section .product-image-wrap {
+  position: relative;
+  background: var(--bundle-brand-light);
+  overflow: hidden;
+}
+
+.bundle-section .product-image-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.bundle-section .product-no-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bundle-text-muted);
+  font-size: 0.8rem;
+}
+
+.bundle-section .bundle-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--bundle-brand);
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--bundle-radius);
+}
+
+.bundle-section .product-info {
+  padding: 12px;
+  flex: 1;
+}
+
+.bundle-section .product-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: 'PT Sans', sans-serif;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.bundle-section .product-type {
+  font-size: 0.75rem;
+  color: var(--bundle-text-muted);
+  margin-bottom: 6px;
+}
+
+.bundle-section .product-price {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--bundle-brand);
+}
+
+.bundle-section .variant-select {
+  width: 100%;
+  margin-top: 8px;
+  padding: 5px 8px;
+  font-size: 0.78rem;
+  font-family: 'Poppins', sans-serif;
+  border: 1px solid var(--bundle-border);
+  border-radius: var(--bundle-radius);
+  background: var(--bundle-white);
+  color: var(--bundle-text);
+  cursor: pointer;
+}
+
+.bundle-section .product-actions {
+  padding: 0 12px 12px;
+}
+
+.bundle-section .add-btn {
+  width: 100%;
+  padding: 8px;
+  background: var(--bundle-brand);
+  color: white;
+  border: none;
+  border-radius: var(--bundle-radius);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.bundle-section .add-btn:hover { background: var(--bundle-brand-dark); }
+
+/* ── Qty control ─────────────────────────────────────────────── */
+
+.bundle-section .qty-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bundle-section .qty-btn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--bundle-border);
+  border-radius: var(--bundle-radius);
+  background: var(--bundle-white);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.bundle-section .qty-btn:hover { background: var(--bundle-brand-light); }
+
+.bundle-section .qty-display {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.bundle-section .qty-control.small .qty-btn    { width: 24px; height: 24px; font-size: 0.9rem; }
+.bundle-section .qty-control.small .qty-display { font-size: 0.85rem; }
+
+/* ── Bundle sidebar ──────────────────────────────────────────── */
+
+.bundle-section #bundle-sidebar {
+  background: var(--bundle-white);
+  border-left: 1px solid var(--bundle-border);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.bundle-section .sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--bundle-border);
+}
+
+.bundle-section .sidebar-header h2 {
+  font-size: 1.1rem;
+  font-family: 'PT Sans', sans-serif;
+  color: var(--bundle-brand-dark);
+  margin-bottom: 16px;
+}
+
+/* ── Milestones / progress ───────────────────────────────────── */
+
+.bundle-section .milestones-section { margin-bottom: 12px; }
+
+.bundle-section .milestone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--bundle-text-muted);
+  margin-bottom: 4px;
+}
+
+.bundle-section .milestone.reached { color: var(--bundle-success); font-weight: 600; }
+
+.bundle-section .milestone-icon {
+  font-size: 0.9rem;
+  width: 16px;
+  text-align: center;
+}
+
+.bundle-section .progress-bar {
+  height: 8px;
+  background: var(--bundle-border);
+  border-radius: var(--bundle-radius);
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.bundle-section #progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--bundle-brand) 0%, var(--bundle-accent) 100%);
+  border-radius: var(--bundle-radius);
+  transition: width 0.4s ease;
+}
+
+.bundle-section #next-tier-msg {
+  font-size: 0.8rem;
+  color: var(--bundle-brand);
+  font-weight: 600;
+  text-align: center;
+  padding: 6px 12px;
+  background: var(--bundle-brand-light);
+  border-radius: var(--bundle-radius);
+  display: none;
+}
+
+/* ── Bundle items list ───────────────────────────────────────── */
+
+.bundle-section .bundle-items-section {
+  padding: 16px 20px;
+  flex: 1;
+  overflow-y: auto;
+  border-bottom: 1px solid var(--bundle-border);
+}
+
+.bundle-section .empty-bundle {
+  color: var(--bundle-text-muted);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.bundle-section .bundle-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--bundle-border);
+}
+
+.bundle-section .bundle-item:last-child { border-bottom: none; }
+
+.bundle-section .bundle-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.bundle-section .bundle-item-title {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bundle-section .bundle-item-variant {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--bundle-text-muted);
+}
+
+.bundle-section .bundle-item-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.bundle-section .bundle-item-price {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--bundle-brand);
+  min-width: 54px;
+  text-align: right;
+}
+
+.bundle-section .remove-btn {
+  background: none;
+  border: none;
+  color: var(--bundle-text-muted);
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 2px;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.bundle-section .remove-btn:hover { color: #c0392b; }
+
+/* ── Totals ────────────────────────────────────────────────────  */
+
+.bundle-section .totals-section {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--bundle-border);
+}
+
+.bundle-section .total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.88rem;
+  margin-bottom: 8px;
+}
+
+.bundle-section .total-row.discount { color: var(--bundle-success); font-weight: 600; }
+
+.bundle-section .total-row.final {
+  font-size: 1.05rem;
+  font-weight: 700;
+  border-top: 1px solid var(--bundle-border);
+  padding-top: 10px;
+  margin-top: 4px;
+  margin-bottom: 0;
+  color: var(--bundle-brand-dark);
+}
+
+/* ── Checkout button ─────────────────────────────────────────── */
+
+.bundle-section .checkout-section { padding: 16px 20px; }
+
+.bundle-section #checkout-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--bundle-brand);
+  color: white;
+  border: none;
+  border-radius: var(--bundle-radius);
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: background 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.bundle-section #checkout-btn:hover:not(:disabled) { background: var(--bundle-brand-dark); }
+
+.bundle-section #checkout-btn:disabled {
+  background: var(--bundle-border);
+  color: var(--bundle-text-muted);
+  cursor: not-allowed;
+}
+
+.bundle-section .checkout-note {
+  font-size: 0.75rem;
+  color: var(--bundle-text-muted);
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* ── Subscriber modal ────────────────────────────────────────── */
+
+.bundle-section .modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+  padding: 16px;
+}
+
+.bundle-section .modal {
+  background: var(--bundle-white);
+  border-radius: var(--bundle-radius);
+  padding: 40px 32px 32px;
+  max-width: 460px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+}
+
+.bundle-section .modal-icon { font-size: 2.5rem; margin-bottom: 12px; }
+
+.bundle-section .modal h2 {
+  font-size: 1.4rem;
+  font-family: 'PT Sans', sans-serif;
+  color: var(--bundle-brand-dark);
+  margin-bottom: 12px;
+}
+
+.bundle-section .modal p {
+  font-size: 0.95rem;
+  color: var(--bundle-text);
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.bundle-section .modal-sub {
+  font-size: 0.85rem !important;
+  color: var(--bundle-text-muted) !important;
+}
+
+.bundle-section .modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.bundle-section .modal-btn-primary {
+  padding: 14px;
+  background: var(--bundle-brand);
+  color: white;
+  border: none;
+  border-radius: var(--bundle-radius);
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.bundle-section .modal-btn-primary:hover { background: var(--bundle-brand-dark); }
+
+.bundle-section .modal-btn-secondary {
+  display: block;
+  padding: 12px;
+  background: var(--bundle-brand-light);
+  color: var(--bundle-brand-dark);
+  border: 1px solid var(--bundle-border);
+  border-radius: var(--bundle-radius);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.bundle-section .modal-btn-secondary:hover { background: var(--bundle-border); }
+
+.bundle-section .modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: var(--bundle-text-muted);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.bundle-section .modal-close:hover { color: var(--bundle-text); }
+
+/* ── Responsive ──────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .bundle-section #app-content { grid-template-columns: 1fr; }
+
+  .bundle-section #bundle-sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: min(380px, 100vw);
+    height: 100vh;
+    z-index: 200;
+    transition: right 0.3s ease;
+    border-left: 1px solid var(--bundle-border);
+    box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+  }
+
+  .bundle-section #bundle-sidebar.open { right: 0; }
+
+  .bundle-section .toggle-bundle-btn {
+    display: flex;
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    z-index: 150;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+}
+
+@media (max-width: 600px) {
+  .bundle-section #product-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .bundle-section #search-input { width: 100%; }
+  .bundle-section .product-panel-header { flex-direction: column; align-items: flex-start; }
+}
