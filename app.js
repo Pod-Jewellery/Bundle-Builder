@@ -1,5 +1,5 @@
 // ============================================================
-// POD Jewellery Bundle Builder — Application Logic
+// Pod Jewellery Bundle Builder — Application Logic
 // ============================================================
 
 const App = (() => {

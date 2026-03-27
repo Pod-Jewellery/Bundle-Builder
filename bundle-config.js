@@ -1,5 +1,5 @@
 // ============================================================
-// POD Jewellery Bundle Builder — Configuration
+// Pod Jewellery Bundle Builder — Configuration
 // ============================================================
 // Edit these settings to match your store setup.
 
