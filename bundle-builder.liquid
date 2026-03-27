@@ -1,0 +1,136 @@
+{{ 'bundle-styles.css' | asset_url | stylesheet_tag }}
+
+<div class="bundle-section">
+
+  <!-- ── Subscriber benefit bar ──────────────────────────────── -->
+  <div class="subscriber-bar">
+    <span class="subscriber-bar-icon">✉</span>
+    <span><strong>Exclusive subscriber benefit</strong> — these discounts are available to POD Jewellery newsletter subscribers only.</span>
+    <a href="YOUR_SIGNUP_PAGE_URL" target="_blank" class="subscriber-bar-link">Not subscribed yet? Sign up free →</a>
+  </div>
+
+  <!-- ── Discount tier banner ────────────────────────────────── -->
+  <div class="discount-banner">
+    <div class="banner-tier">
+      <div class="tier-icon">$20</div>
+      <span>Spend $200 — save $20</span>
+    </div>
+    <div class="banner-tier">
+      <div class="tier-icon">$50</div>
+      <span>Spend $500 — save $50</span>
+    </div>
+    <div class="banner-tier">
+      <div class="tier-icon">$75</div>
+      <span>Spend $750 — save $75</span>
+    </div>
+    <div class="banner-tier">
+      <div class="tier-icon">$100</div>
+      <span>Spend $1000 — save $100</span>
+    </div>
+  </div>
+
+  <!-- ── Loading state ───────────────────────────────────────── -->
+  <div id="loading">
+    <div class="spinner"></div>
+    <p>Loading products…</p>
+  </div>
+
+  <!-- ── Main app ────────────────────────────────────────────── -->
+  <div id="app-content" style="display:none">
+
+    <!-- Product panel -->
+    <div class="product-panel">
+      <div class="product-panel-header">
+        <span class="product-count" id="product-count"></span>
+        <input
+          type="search"
+          id="search-input"
+          placeholder="Search products…"
+          aria-label="Search products"
+        />
+      </div>
+
+      <div id="filter-bar"></div>
+      <div id="product-grid"></div>
+    </div>
+
+    <!-- Bundle sidebar -->
+    <aside id="bundle-sidebar">
+      <div class="sidebar-header">
+        <h2>Your Bundle</h2>
+
+        <div class="milestones-section">
+          <div id="discount-milestones"></div>
+          <div class="progress-bar">
+            <div id="progress-bar-fill" style="width:0%"></div>
+          </div>
+          <div id="next-tier-msg"></div>
+        </div>
+      </div>
+
+      <div class="bundle-items-section">
+        <div id="bundle-items"></div>
+      </div>
+
+      <div class="totals-section">
+        <div class="total-row">
+          <span>Subtotal</span>
+          <span id="subtotal">$0.00</span>
+        </div>
+        <div class="total-row discount" id="discount-row" style="display:none">
+          <span id="discount-label">Bundle discount</span>
+          <span id="discount-amount"></span>
+        </div>
+        <div class="total-row final">
+          <span>Total</span>
+          <span id="final-total">$0.00</span>
+        </div>
+      </div>
+
+      <div class="checkout-section">
+        <button id="checkout-btn" disabled>Proceed to Checkout</button>
+        <p class="checkout-note">Subscriber discounts applied automatically at checkout</p>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ── Subscriber gate modal ───────────────────────────────── -->
+  <div id="subscriber-modal" class="modal-overlay" style="display:none">
+    <div class="modal">
+      <div class="modal-icon">✉</div>
+      <h2>Subscriber Exclusive</h2>
+      <p>These bundle discounts are a free benefit for POD Jewellery newsletter subscribers.</p>
+      <p class="modal-sub">Already subscribed? Go ahead and checkout — your discount will be applied automatically.</p>
+      <div class="modal-actions">
+        <button id="modal-confirm-btn" class="modal-btn-primary">Yes, I'm subscribed — continue to checkout</button>
+        <a href="YOUR_SIGNUP_PAGE_URL" target="_blank" class="modal-btn-secondary">Not subscribed yet? Sign up free</a>
+      </div>
+      <button id="modal-close-btn" class="modal-close">✕</button>
+    </div>
+  </div>
+
+  <!-- ── Mobile bundle toggle (fixed floating button) ────────── -->
+  <button class="toggle-bundle-btn" id="toggle-bundle-btn">
+    🛍 My Bundle
+    <span id="bundle-count"></span>
+  </button>
+
+</div>
+
+{{ 'bundle-config.js' | asset_url | script_tag }}
+{{ 'bundle-app.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+  "name": "Bundle Builder",
+  "tag": "section",
+  "class": "bundle-builder-section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Bundle Builder"
+    }
+  ]
+}
+{% endschema %}
